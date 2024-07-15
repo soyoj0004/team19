@@ -1,0 +1,76 @@
+-- sys에서 계정 생성
+create user shopboard identified by 1234;
+grant connect, resource to shopboard;
+grant unlimited tablespace to shopboard;
+
+-- shopboard
+CREATE TABLE "member" (
+	"memberId"	varchar(20)		NOT NULL,
+	"password"	varchar(40)		NOT NULL,
+	"name"	varchar(10)		NOT NULL,
+	"phone"	varchar(15)		NOT NULL,
+	"email"	varchar(20)		NOT NULL,
+	"gender"	varchar(10)		NOT NULL
+);
+
+CREATE TABLE "totalOrder" (
+	"order_Id"	INT		NOT NULL,
+	"memberId"	varchar(20)		NOT NULL,
+	"total_price"	INT		NOT NULL,
+	"order_date"	DATE		NULL,
+	"order_name"	VARCHAR(10)		NOT NULL,
+	"status"	VARCHAR(20)		NULL,
+	"addr"	VARCHAR(300)		NOT NULL,
+	"addrDetail"	VARCHAR(100)		NOT NULL,
+	"phone"	VARCHAR(15)		NOT NULL,
+	"itemCNT"	INT		NULL,
+	"itemName"	VARCHAR(15)		NULL,
+	"itemImg"	VARCHAR(600)		NULL
+);
+
+CREATE TABLE "basket" (
+	"bano"	int		NOT NULL,
+	"proId"	int		NOT NULL,
+	"memberId"	varchar(20)		NOT NULL,
+	"cnt"	int		NOT NULL
+);
+
+CREATE TABLE "product" (
+	"proId"	int		NOT NULL,
+	"categoryKey_ID"	int		NOT NULL,
+	"name"	varchar(20)		NOT NULL,
+	"img1"	varchar(600)		NOT NULL,
+	"img2"	varchar(600)		NULL,
+	"img3"	varchar(600)		NULL,
+	"img4"	varchar(600)		NULL,
+	"img5"	varchar(600)		NULL,
+	"content"	varchar(200)		NOT NULL,
+	"price"	int		NOT NULL
+);
+
+CREATE TABLE "category" (
+	"categoryKey_ID"	int		NOT NULL,
+	"categoryKey_num"	INT		NULL,
+	"name"	VARCHAR(30)		NOT NULL
+);
+
+ALTER TABLE "member" ADD CONSTRAINT "PK_MEMBER" PRIMARY KEY (
+	"memberId"
+);
+
+ALTER TABLE "totalOrder" ADD CONSTRAINT "PK_TOTALORDER" PRIMARY KEY (
+	"order_Id"
+);
+
+ALTER TABLE "basket" ADD CONSTRAINT "PK_BASKET" PRIMARY KEY (
+	"bano"
+);
+
+ALTER TABLE "product" ADD CONSTRAINT "PK_PRODUCT" PRIMARY KEY (
+	"proId"
+);
+
+ALTER TABLE "category" ADD CONSTRAINT "PK_CATEGORY" PRIMARY KEY (
+	"categoryKey_ID"
+);
+
