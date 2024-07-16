@@ -58,7 +58,7 @@ public class ProductController {
 //		log.info("여기는 listProduct 메소드"); 
 		List<ProductVo> productList = productService.listProduct();
 		model.addAttribute("productList", productList);
-		return "product/productList"; // jsp 이름
+		return "redirect:product/productList"; // jsp 이름
 	}
 	
 	/**

@@ -29,7 +29,7 @@
 					type="submit" value="검색" />
 			</form>
 
-			<c:if test="${not empty productList}">
+		 	<c:if test="${not empty productList}">
 				<div class="content">
 					<div class="product-content">
 						<c:forEach var="product" items="${productList }" varStatus="idx">
@@ -50,8 +50,8 @@
 						<td align="center" colspan="8">${page_navigator}</td>
 					</tr>
 				</table> --%>
-			</c:if>
-			<c:if test="${ not empty sessionScope.memberVo && sessionScope.memberVo.memberId == 'java' }">
+ 			</c:if>
+			<c:if test="${sessionScope.memberVo != 'null' && sessionScope.memberVo.memberId == 'java' }">
 			<br> <a href="<c:url value='/product/create'/>">상품 작성</a>
 			</c:if>
 		</main>

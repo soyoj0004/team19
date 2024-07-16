@@ -10,6 +10,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>main.jsp</title>
+<head>
+<meta charset="UTF-8">
 <title>main.jsp</title>
 <style>
 .mainheader .cart {
@@ -109,17 +113,18 @@
 	<div>
 		<jsp:include page="/resources/common/mainheader.jsp" />
 	</div>
+
 	<!-- 네비게이션 바 시작 -->
 	<div class="nav-menu">
 		<div class="nav-category">
-			<img src="/resources/image/menubar.png" class="imgmenu"> 
-			<a href="/product1">카테고리</a>
+			<img src="/resources/image/menubar.png" class="imgmenu"> <a
+				href="/product1">카테고리</a>
 		</div>
 		<div class="nav-categorymain">
-			<a href="<c:url value='/product/list'/>">신상품</a> 
-			<a href="<c:url value='/category3'/>">베스트</a> 
-			<a href="<c:url value='/category4'/>">특가/혜택</a> 
-			<a href="<c:url value='/category5'/>">계절별음식</a>
+			<a href="<c:url value='/product/list'/>">신상품</a> <a
+				href="<c:url value='/category3'/>">베스트</a> <a
+				href="<c:url value='/category4'/>">특가/혜택</a> <a
+				href="<c:url value='/category5'/>">계절별음식</a>
 		</div>
 	</div>
 	<!-- 네비게이션 바 끝 -->
@@ -168,20 +173,22 @@
 	<!-- 푸터 끝 -->
 
 	<script>
-    let slideIndex = 0;
-    showSlides();
+		let slideIndex = 0;
+		showSlides();
 
-    function showSlides() {
-        let slides = document.getElementsByClassName("mySlides");
-        for (let i = 0; i < slides.length; i++) {
-            slides[i].style.display = "none";  
-        }
-        slideIndex++;
-        if (slideIndex > slides.length) {slideIndex = 1}    
-        slides[slideIndex-1].style.display = "block";  
-        setTimeout(showSlides, 2000); // Change image every 2 seconds
-    }
-    </script>
+		function showSlides() {
+			let slides = document.getElementsByClassName("mySlides");
+			for (let i = 0; i < slides.length; i++) {
+				slides[i].style.display = "none";
+			}
+			slideIndex++;
+			if (slideIndex > slides.length) {
+				slideIndex = 1
+			}
+			slides[slideIndex - 1].style.display = "block";
+			setTimeout(showSlides, 2000); // Change image every 2 seconds
+		}
+	</script>
 </body>
 </html>
 

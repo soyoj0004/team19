@@ -38,8 +38,8 @@ div { /* 각 div 요소에 5px의 여백을 추가 */
 				id="password" name="password" value="${memberVo.password}" required>
 		</div>
 		<div class="button-group">
-			<input type="submit" value="로그인"> <input type="reset"
-				value="다시쓰기">
+			<input type="submit" value="로그인"> 
+			<input type="reset" value="다시쓰기">
 			<!-- 회원가입 버튼. 링크로 이동 -->
 			<a href="<c:url value='/member/create'/>">
 				<button type="button">회원가입</button>
