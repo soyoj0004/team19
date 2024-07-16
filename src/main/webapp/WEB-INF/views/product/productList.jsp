@@ -90,9 +90,13 @@
 					<div class="product-content">
 						<c:forEach var="product" items="${productList }" varStatus="idx">
 							<div class="product-item">
-							<a href="<c:url value='/detail'/>"> <img src="${contextPath}/resources/uploads/${product.img1 }" alt="상품" /></a>
+							<%-- <a href="<c:url value='/product/detail/${product.img1 }'/>"> --%>
+							<a href="<c:url value='/product/detail/${product.proId }'/>"> <img src="${contextPath}/resources/uploads/${product.img1 }" alt="상품" /></a>
+							<a href="<c:url value='/product/detail/${product.proId }'/>"><c:out value="${product.name }"></c:out></a> <br>
+							<a href="<c:url value='/product/detail/${product.proId }'/>"><c:out value="${product.price }"></c:out></a>
+<%-- 							<a href="<c:url value='/product/detail/${product.proId }'/>"> <img src="${contextPath}/resources/uploads/${product.img1 }" alt="상품" /></a>
 							<a href="<c:url value='/detail'/>"><c:out value="${product.name }"></c:out></a> <br>
-							<a href="<c:url value='/detail'/>"><c:out value="${product.price }"></c:out></a>
+							<a href="<c:url value='/detail'/>"><c:out value="${product.price }"></c:out></a> --%>
 							</div>
 						</c:forEach>
 					</div>
