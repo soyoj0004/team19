@@ -13,5 +13,6 @@
     </settings> -->
     <typeAliases>
         <!-- <typeAlias type="com.javalab.board.vo.BoardVo" alias="BoardVo"/> -->
+        <typeAlias type="com.javalab.board.vo.ProductVo" alias="ProductVo"/>
     </typeAliases>
 </configuration>

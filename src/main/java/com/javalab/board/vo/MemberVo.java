@@ -22,14 +22,16 @@ public class MemberVo {
 	private String name;
 	private String email;
 	private String phone;
+	private String gender;
 	private int point;  // 포인트 점수 필드 추가
 
-	public MemberVo(String memberId, String password, String name, String email, String phone) {
+	public MemberVo(String memberId, String password, String name, String email, String phone, String gender) {
 		this.memberId = memberId;
 		this.password = password;
 		this.name = name;
 		this.email = email;
 		this.phone = phone;
+		this.gender = gender;
 	}
 	// 비밀번호를 제외한 나머지 정보만 세션에 보관하기 위해서 별도로 생성자 정의
 	public MemberVo(String memberId, String name, String email) {

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!-- 컨텍스트패스(진입점폴더) 변수 설정 -->
 <c:set var="contextPath" value="${pageContext.request.contextPath }" />
@@ -12,32 +12,42 @@
 <title>회원가입</title>
 </head>
 <body>
-    <h3>회원가입</h3>
-    <form id="regForm" action="<c:url value='/member/create'/>" method="post">
-        <div>
-            아이디 : <input type="text" name="memberId" id="memberId">
-        </div>    
-        <div>
-            비밀번호 : <input type="text" name="password" id="password">
-        </div>    
-        <div>
-            비밀번호확인 : <input type="text" id="pwdConfirm">
-        </div>    
-        <div>
-            이름 : <input type="text" name="name" id="name">
-        </div>    
-        <div>
-            연락처 : <input type="text" name="phone" id="phone">
-        </div>        
-        <div>
-            이메일 : <input type="text" name="email" id="email">
-        </div>
-        <div>
-            <input type="submit" id="btnSubmit" value="전송">
-        </div>
-    </form>
-    
-    <script>
+	<div>
+		<jsp:include page="/resources/common/mainheader.jsp" />
+	</div>
+	<form id="regForm" action="<c:url value='/member/create'/>"
+		method="post">
+		<div>
+			아이디 : <input type="text" name="memberId" id="memberId">
+		</div>
+		<div>
+			비밀번호 : <input type="text" name="password" id="password">
+		</div>
+		<div>
+			비밀번호확인 : <input type="text" id="pwdConfirm">
+		</div>
+		<div>
+			이름 : <input type="text" name="name" id="name">
+		</div>
+		<div>
+			연락처 : <input type="text" name="phone" id="phone">
+		</div>
+		<div>
+			이메일 : <input type="text" name="email" id="email">
+		</div>
+		<div>
+			성별 : 
+			<input type="radio" name="gender" id="male" value="male">
+			<label for="male">남자</label> 
+			<input type="radio" name="gender" id="female" value="female"> 
+			<label for="female">여자</label>
+		</div>
+		<div>
+			<input type="submit" id="btnSubmit" value="전송">
+		</div>
+	</form>
+
+	<script>
         // form 태그 submit 이벤트 핸들러 설정
         // id속성이 regForm요소에 이벤트 핸들러 설정(regForm -> regForm5)
         const form = document.getElementById("regForm5"); 
@@ -133,6 +143,6 @@
             // 모든 검증이 끝난 경우 폼 제출
             form.submit();
         });
-    </script>    
+    </script>
 </body>
 </html>

@@ -113,13 +113,13 @@
 	<div class="nav-menu">
 		<div class="nav-category">
 			<img src="/resources/image/menubar.png" class="imgmenu"> 
-			<a href="/category2">카테고리</a>
+			<a href="/product1">카테고리</a>
 		</div>
 		<div class="nav-categorymain">
-			<a href="<c:url value='/board/list'/>">신상품</a> <a
-				href="<c:url value='/category3'/>">베스트</a> <a
-				href="<c:url value='/category4'/>">특가/혜택</a> <a
-				href="<c:url value='/category5'/>">계절별음식</a>
+			<a href="<c:url value='/product/list'/>">신상품</a> 
+			<a href="<c:url value='/category3'/>">베스트</a> 
+			<a href="<c:url value='/category4'/>">특가/혜택</a> 
+			<a href="<c:url value='/category5'/>">계절별음식</a>
 		</div>
 	</div>
 	<!-- 네비게이션 바 끝 -->

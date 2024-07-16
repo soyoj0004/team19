@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.javalab.board.vo.BoardVo;
+import com.javalab.board.vo.ProductVo;
 import com.javalab.board.vo.MemberVo;
 
 import lombok.extern.slf4j.Slf4j;

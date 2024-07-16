@@ -10,9 +10,9 @@
 	
 	<!-- login -->
 	<select id="login" parameterType="MemberVo" resultType="MemberVo">
-		select member_id, password, name, email
+		select memberId, password, name, phone, email, gender
 		from member
-		where member_id = #{memberId}
+		where memberId = #{memberId}
 		and password = #{password}
 	</select>
 	

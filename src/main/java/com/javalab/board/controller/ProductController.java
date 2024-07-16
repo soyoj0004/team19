@@ -18,9 +18,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.javalab.board.service.BoardService;
-import com.javalab.board.vo.BoardVo;
+import com.javalab.board.service.ProductService;
 import com.javalab.board.vo.MemberVo;
+import com.javalab.board.vo.ProductVo;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -31,43 +31,42 @@ import lombok.extern.slf4j.Slf4j;
  * - 서비스로 부터 전달받은 쿼리결과를 model에 담고 담은 값을 보여줄 jsp 페이지 이름 리턴
  */
 @Controller
-@RequestMapping("/board")	// 컨트롤러 차원의 Url 연결 문자열 설정
+@RequestMapping("/product")	// 컨트롤러 차원의 Url 연결 문자열 설정
 @Slf4j
 public class ProductController {
 	
 	// Board 서비스 레이어 의존성 주입
 	@Autowired
-	private BoardService boardService;
+	private ProductService productService;
 	
 	/**
-	 * 게시물 내용 보기 메소드
+	 * 상품 내용 보기 메소드
 	 */
-	//@GetMapping("/detail")
-	//public String getBoard(@RequestParam("bno") int bno, Model model) {
-    @GetMapping("/detail/{bno}")
-    public String getBoard(@PathVariable("bno") int bno, Model model) {	
-		log.info("BoardController getBoard");
-		BoardVo boardVo = boardService.getBoard(bno);
-		model.addAttribute("boardVo", boardVo);
-		return "board/boardDetail"; // jsp 이름
+    @GetMapping("/detail/{proId}")
+    public String getBoard(@PathVariable("proId") int proId, Model model) {	
+//		log.info("ProductController getProduct");
+		ProductVo productVo = productService.getProduct(proId);
+		model.addAttribute("productVo", productVo);
+		return "product/productDetail"; // jsp 이름
 	}
 	
 	/**
-	 * 게시물 목록 보기 메소드
+	 * 상품 목록 보기 메소드
 	 */
 	@GetMapping("/list")
-	public String listBoard(Model model) {
-		log.info("여기는 listBoard 메소드"); 
-		List<BoardVo> boardList = boardService.listBoard();
-		model.addAttribute("boardList", boardList);
-		return "board/boardList"; // jsp 이름
+	public String listProduct(Model model) {
+//		log.info("여기는 listProduct 메소드"); 
+		List<ProductVo> productList = productService.listProduct();
+		model.addAttribute("productList", productList);
+		return "product/productList"; // jsp 이름
 	}
 	
 	/**
-	 * 게시물 등록폼 제공(Get방식)
+	 * 상품 등록폼 제공(Get방식)
+	 * 여기서 memberId가 관리자일때 등록폼으로 가게끔
 	 */
 	@GetMapping("/create")
-	public String createBoard(HttpSession session, 
+	public String createProduct(HttpSession session, 
 								RedirectAttributes redirectAttributes, 
 								Model model) {
 		// 세션에서 사용자 정보 조회
@@ -76,73 +75,88 @@ public class ProductController {
             return "redirect:/login";
         }	
         
-		model.addAttribute("boardVo", new BoardVo());
-		return "board/boardCreate";
+		model.addAttribute("productVo", new ProductVo());
+		return "product/productCreate";
 	}
 	
 	/**
-	 * 게시물 등록 메소드(Post방식)
+	 * 상품 등록폼 제공(Get방식)
+	 * 여기서 memberId가 관리자일때 등록폼으로 가게끔 < gpt돌려봄
+	 */
+//	@GetMapping("/create")
+//	public String createProduct(HttpSession session, 
+//	                            RedirectAttributes redirectAttributes, 
+//	                            Model model) {
+//	    // 세션에서 사용자 정보 조회
+//	    MemberVo memberVo = (MemberVo) session.getAttribute("memberVo");
+//	    if (memberVo == null || !"java".equals(memberVo.getMemberId())) {
+//	        return "redirect:/login";
+//	    }
+//	    
+//	    model.addAttribute("boardVo", new BoardVo());
+//	    return "board/boardCreate";
+//	}
+	
+	/**
+	 * 상품 등록 메소드(Post방식)
 	 * @ModelAttribute : 사용자의 입력에 오류가 있을 경우 기존의 내용을 그대로
 	 * 화면으로 다시 전달해준다.
 	 */
 	@PostMapping("/create")
-	public String createBoard(@ModelAttribute("boardVo") BoardVo boardVo, HttpSession session) {
+	public String createProduct(@ModelAttribute("productVo") ProductVo productVo,
+									HttpSession session) {
 		// 세션에서 사용자 정보 조회
         MemberVo memberVo = (MemberVo) session.getAttribute("memberVo");
         if (memberVo == null) {
             return "redirect:/login";
         }		
-        // 세션에서 조회한 사용자를 작성로 설정
-        boardVo.setMemberId(memberVo.getMemberId());
         
-		boardService.createBoard(boardVo);
-		return "redirect:/board/list";	// 목록 요청(listBoard() 호출)
+		productService.createProduct(productVo);
+		return "/product/productList";
 	}
 
-	/**
-	 * 게시물 수정폼(화면-Get)
-	 */
-	@GetMapping("/update")
-	public String updateBoard(@RequestParam("bno") int bno, 
-								HttpSession session, Model model) {
-		// 세션에서 사용자 정보 조회
-        MemberVo memberVo = (MemberVo) session.getAttribute("memberVo");
-        if (memberVo == null) {
-            return "redirect:/login";
-        }		
-        
-		BoardVo boardVo = boardService.getBoard(bno);
-		model.addAttribute("boardVo", boardVo);	// 화면에 보여줄 게시물을 model에 저장
-		return "board/boardUpdate";
-	}
-	
-	/**
-	 * 게시물 수정 메소드(Post)
-	 */
-	@PostMapping("/update")
-	public String updateBoard(@ModelAttribute("boardVo") BoardVo boardVo,
-								HttpSession session) {
-		// 세션에서 사용자 정보 조회
-        MemberVo memberVo = (MemberVo) session.getAttribute("memberVo");
-        if (memberVo == null) {
-            return "redirect:/login";
-        }
-        
-        // 세션에서 조회한 사용자를 작성로 설정
-        boardVo.setMemberId(memberVo.getMemberId());
-        
-		boardService.updateBoard(boardVo);
-		return "redirect:/board/list";	// 목록 요청(listBoard() 호출)
-	}
-	
-	/**
-	 * 게시물 삭제 메소드
-	 */
-	@PostMapping("/delete")
-	public String deleteBoard(@RequestParam("bno") int bno) {
-		boardService.deleteBoard(bno);
-		return "redirect:/board/list";	// 목록 요청(listBoard() 호출)
-	}
+	// 상품 수정이랑 삭제는 일단 보류(.jsp가 없음)
+//	/**
+//	 * 상품 수정폼(화면-Get)
+//	 */
+//	@GetMapping("/update")
+//	public String updateProduct(@RequestParam("proId") int proId, 
+//								HttpSession session, Model model) {
+//		// 세션에서 사용자 정보 조회
+//        MemberVo memberVo = (MemberVo) session.getAttribute("memberVo");
+//        if (memberVo == null) {
+//            return "redirect:/login";
+//        }		
+//        
+//        ProductVo productVo = productService.getProduct(proId);
+//		model.addAttribute("productVo", productVo);	// 화면에 보여줄 게시물을 model에 저장
+//		return "product/productUpdate";
+//	}
+//	
+//	/**
+//	 * 상품 수정 메소드(Post)
+//	 */
+//	@PostMapping("/update")
+//	public String updateProduct(@ModelAttribute("productVo") ProductVo productVo,
+//								HttpSession session) {
+//		// 세션에서 사용자 정보 조회
+//        MemberVo memberVo = (MemberVo) session.getAttribute("memberVo");
+//        if (memberVo == null) {
+//            return "redirect:/login";
+//        }
+//        
+//        productService.updateProduct(productVo);
+//		return "redirect:/product/list";	// 목록 요청(listBoard() 호출)
+//	}
+//	
+//	/**
+//	 * 상품 삭제 메소드
+//	 */
+//	@PostMapping("/delete")
+//	public String deleteProduct(@RequestParam("proId") int proId) {
+//		productService.deleteProduct(proId);
+//		return "redirect:/product/list";	// 목록 요청(listBoard() 호출)
+//	}
 	
     /**
      * 세션 확인 메서드
@@ -168,7 +182,7 @@ public class ProductController {
 		for(MultipartFile file : files) {
 			if(!file.isEmpty()) {
 				try {
-					log.info("업로드 파일명 : " + file.getOriginalFilename());
+//					log.info("업로드 파일명 : " + file.getOriginalFilename());
 					File dest = new File(uploadDir + file.getOriginalFilename());
 					// 파일 저장
 					file.transferTo(dest);

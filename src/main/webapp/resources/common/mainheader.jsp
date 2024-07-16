@@ -56,10 +56,10 @@
 
 	</nav>
 	<div class="user-info">
-		<a href="<c:url value='/basket'/>"> <img src="/resources/image/cart.png" alt="장바구니" class="cart">
+		<a href="<c:url value='/basketmain'/>"> <img src="/resources/image/cart.png" alt="장바구니" class="cart">
 		</a>
 		<c:if test="${not empty sessionScope.memberVo}">
-			<p>${sessionScope.memberVo.name}님</p>
+			<a href="<c:url value='/mypage'/>">${sessionScope.memberVo.name}님</a>
 			<a href="<c:url value='/logout'/>">로그아웃</a>
 		</c:if>
 		<c:if test="${empty sessionScope.memberVo}">

@@ -12,7 +12,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>boardList.jsp</title>
+<title>productList.jsp</title>
 <style>
 .mainheader .cart {
 	max-height: 30px; /* 장바구니 이미지의 최대 높이 설정 */
@@ -114,7 +114,7 @@
 		<div class="nav-menu">
 			<div class="nav-category">
 				<img src="/resources/image/menubar.png" class="imgmenu"> 
-				<a href="/board/list">카테고리</a>
+				<a href="/product/list">카테고리</a>
 			</div>
 			<div class="nav-categorymain">
 				<a href="<c:url value='/category2'/>">신상품</a> <a
@@ -128,11 +128,11 @@
 		<!-- 메인 콘텐츠 시작 -->
 		<div class="content">
 			<div class="product-content">
-				<c:forEach var="board" items="${boardList }" varStatus="idx">
+				<c:forEach var="product" items="${productList }" varStatus="idx">
 					<div class="product-item">
-						<img src="${contextPath}/resources/uploads/${board.fileName }" alt="${board.fileName }">
-						<p><c:out value="${board.title }"/></p>
-						<p class="price"><c:out value="${board.regDate }"/></p>
+						<img src="${contextPath}/resources/uploads/${product.img1 }" alt="${product.img1 }">
+						<p><c:out value="${product.name }"/></p>
+						<p class="price"><c:out value="${product.price }"/></p>
 					</div>
 				</c:forEach>
 			</div>

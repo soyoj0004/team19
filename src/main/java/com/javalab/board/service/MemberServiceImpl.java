@@ -23,12 +23,6 @@ public class MemberServiceImpl implements MemberService {
         int result = memberMapper.createMember(memberVo);
         return result;
     }
-    
-	@Override
-    @Transactional
-    public void updateMemberPoint(String memberId) {
-        memberMapper.updateMemberPoint(memberId);
-    }
 
 	@Override
 	public MemberVo getMember(String memberId) {

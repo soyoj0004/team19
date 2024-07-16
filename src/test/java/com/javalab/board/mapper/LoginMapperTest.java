@@ -12,9 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.javalab.board.mapper.BoardMapperInterface;
+import com.javalab.board.mapper.ProductMapperInterface;
 import com.javalab.board.mapper.LoginMapperInterface;
-import com.javalab.board.vo.BoardVo;
+import com.javalab.board.vo.ProductVo;
 import com.javalab.board.vo.MemberVo;
 
 import lombok.extern.slf4j.Slf4j;
@@ -37,7 +37,7 @@ public class LoginMapperTest {
 	 * 매퍼 인터페이스의 의존성 주입이 정상적으로 되는지 확인하는 테스트 메소드
 	 */
 	@Test @Ignore
-	public void testBoardMapper() {
+	public void testProductMapper() {
 		assertNotNull(loginMapper);		
 		log.info("loginMapper 객체 : " + loginMapper);
 	}

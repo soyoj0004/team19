@@ -9,6 +9,5 @@ import com.javalab.board.vo.MemberVo;
  */
 public interface MemberService {
     int createMember(MemberVo member);
-    void updateMemberPoint(String point);
     MemberVo getMember(String memberId);
-}
+}	

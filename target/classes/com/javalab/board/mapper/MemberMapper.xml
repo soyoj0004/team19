@@ -5,24 +5,16 @@
 
 <mapper namespace="com.javalab.board.mapper.MemberMapper">
 
-    <!-- 회원가입 -->
-    <insert id="createMember" parameterType="MemberVo">
-        INSERT INTO member (member_id, password, name, phone, email, gender)
-        VALUES (#{memberId}, #{password}, #{name}, #{phone}, #{email}, #{gender})
-    </insert>
+	<!-- 회원가입 -->
+	<insert id="createMember" parameterType="MemberVo">
+		INSERT INTO member (memberId, password, name, phone, email, gender)
+		VALUES (#{memberId}, #{password}, #{name}, #{phone}, #{email}, #{gender})
+	</insert>
 
-	<!-- 회원 포인트 증가 -->
-    <update id="updateMemberPoint" parameterType="String">
-        UPDATE MEMBER
-        SET POINT = POINT + 1
-        WHERE MEMBER_ID = #{memberId}
-    </update>
-
-    <!-- 회원 정보 조회 -->
-    <select id="getMember" parameterType="String" resultType="MemberVo">
-        SELECT member_id, password, name, email, point
-        FROM member
-        WHERE member_id = #{memberId}
-    </select>
-
+	<!-- 회원 정보 조회 -->
+	<select id="getMember" parameterType="String" resultType="MemberVo">
+		SELECT memberId, password, name, phone, email, gender
+		FROM member	
+		WHERE memberId = #{memberId}
+	</select>
 </mapper>

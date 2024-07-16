@@ -16,6 +16,7 @@ import lombok.ToString;
 @Setter
 @ToString
 public class ProductVo {
+	
 	private int proId;
 	private int categoryKey_ID;
 	private String name;
@@ -26,5 +27,30 @@ public class ProductVo {
 	private String img5;
 	private String content;
 	private int price;
+	
+	// 상품 생성
+	public ProductVo(int categoryKey_ID, String name, String img1, String img2, String img3, String img4,
+			String img5, String content, int price) {
+		this.categoryKey_ID = categoryKey_ID;
+		this.name = name;
+		this.img1 = img1;
+		this.img2 = img2;
+		this.img3 = img3;
+		this.img4 = img4;
+		this.img5 = img5;
+		this.content = content;
+		this.price = price;
+	}
+
+	// 상품 조회
+	public ProductVo(int proId, int categoryKey_ID, String name, String img1, String content, int price) {
+		this.proId = proId;
+		this.categoryKey_ID = categoryKey_ID;
+		this.name = name;
+		this.img1 = img1;
+		this.content = content;
+		this.price = price;
+	}
+	
 	
 }

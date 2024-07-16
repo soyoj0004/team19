@@ -5,8 +5,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,8 +12,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.javalab.board.service.BoardService;
-import com.javalab.board.vo.BoardVo;
+import com.javalab.board.service.MemberService;
+import com.javalab.board.service.ProductService;
+import com.javalab.board.vo.ProductVo;
 
 /**
  * Handles requests for the application home page.
@@ -23,7 +22,11 @@ import com.javalab.board.vo.BoardVo;
 @Controller
 public class HomeController {
 	@Autowired
-	private BoardService boardService;
+	private ProductService productService;
+
+	@Autowired
+	private MemberService memberService;
+
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
@@ -33,17 +36,17 @@ public class HomeController {
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
 		String formattedDate = dateFormat.format(date);
 		model.addAttribute("serverTime", formattedDate );
-		return "main"; // index.jsp
+		return "/main"; // index.jsp
 	}
-	
+
 	/**
 	 * 신상품 목록 보기 메소드
 	 */
-	@GetMapping("/category2")
-	public String listBoard(Model model) {
-		List<BoardVo> boardList = boardService.listBoard();
-		model.addAttribute("boardList", boardList);
-		return "/category2"; // jsp 이름
+	@GetMapping("/product1")
+	public String listProduct(Model model) {
+		List<ProductVo> productList = productService.listProduct();
+		model.addAttribute("productList", productList);
+		return "/product/productList"; // jsp 이름
 	}
-	
+
 }

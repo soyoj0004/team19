@@ -2,7 +2,7 @@ package com.javalab.board.mapper;
 
 import java.util.List;
 
-import com.javalab.board.vo.BoardVo;
+import com.javalab.board.vo.ProductVo;
 
 /**
  * 보드 매퍼 인터페이스
@@ -14,19 +14,19 @@ import com.javalab.board.vo.BoardVo;
  * - 매퍼XML에서는 다음과 같이 설정해놓아야 한다. 그래야 매퍼인터페이스와 매퍼XML이 연결된다.
  *   <mapper namespace="com.javalab.board.repository.BoardMapper">
  */
-public interface BoardMapperInterface {
+public interface ProductMapperInterface {
 	// 게시물 상세 보기
-	public BoardVo getBoard(int bno);
+	public ProductVo getProduct(int proId);
 	// 게시물 목록 보기
-	public List<BoardVo> listBoard();
+	public List<ProductVo> listProduct();
 	// 게시물 등록
-	public int createBoard(BoardVo boardVo);
+	public int createProduct(ProductVo productVo);
 	// 게시물 업데이트
-	public int updateBoard(BoardVo boardVo);
+	public int updateProduct(ProductVo productVo);
 	// 게시물 삭제
-	public int deleteBoard(int bno);
+	public int deleteProduct(int proId);
 	// selectKey 사용 메소드
-	public int createBoardSelectKey(BoardVo boardVo);
+	public int createProductSelectKey(ProductVo productVo);
 	
 	
 	

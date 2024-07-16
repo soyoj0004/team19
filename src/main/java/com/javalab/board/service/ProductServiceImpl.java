@@ -6,15 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.javalab.board.mapper.BoardMapperInterface;
-import com.javalab.board.mapper.MemberMapper;
-import com.javalab.board.vo.BoardVo;
+import com.javalab.board.mapper.ProductMapperInterface;
+import com.javalab.board.vo.ProductVo;
 
 import lombok.extern.slf4j.Slf4j;
 
 
 /**
- * 게시물 서비스 클래스
+ * 상품 서비스 클래스
  * @Service : 나는 서비스 레이어의 스프링 빈 역할을 할 수 있도록 빈으로 생성해라.라는 표시.
  * - root-context.xml 빈 환경설정 파일에 패키지의 위치가 지정되어 있다.
  *   <context:component-scan 
@@ -22,31 +21,27 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Service
 @Slf4j
-public class BoardServiceImpl implements BoardService{
+public class ProductServiceImpl implements ProductService{
 
 	// 보드 매퍼 인터페이스 의존성 주입
 	// 실제로는 매퍼XML을 감싸는 대리인(프로시) 객체가 주입된다.
 	@Autowired
-	private BoardMapperInterface boardMapper;
-	
-	// 멤버 매퍼 인터페이스
-	@Autowired
-    private MemberMapper memberMapper;
-	
+	private ProductMapperInterface productMapper;
+		
 	// 게시물 내용 보기
 	@Override
-	public BoardVo getBoard(int bno) {
-		BoardVo boardVo = boardMapper.getBoard(bno);
-		return boardVo;
+	public ProductVo getProduct(int proId) {
+		ProductVo productVo = productMapper.getProduct(proId);
+		return productVo;
 	}
 
 	@Override
-	public List<BoardVo> listBoard() {
-		return boardMapper.listBoard();
+	public List<ProductVo> listProduct() {
+		return productMapper.listProduct();
 	}
 
 	/**
-	 * 게시물 생성 비즈니스 로직
+	 *  생성 비즈니스 로직
 	 * - 게시물 등록과
 	 * - 게시물 작성 회원의 포인트를 지급하는 두 가지의 업무가 처리됨.
 	 *   이렇게 중요한 두 가지 업무를 처리하는 것을 비즈니스 로직이라고 한다.
@@ -59,47 +54,28 @@ public class BoardServiceImpl implements BoardService{
 	 */
 	@Override
 	@Transactional
-	public int createBoard(BoardVo boardVo) {
+	public int createProduct(ProductVo productVo) {
 		// 게시물 저장 처리
 		//int result = boardMapper.createBoard(boardVo);	// 오리지널
 		
-		log.info("게시물 저장전 bno : " + boardVo.getBno());	// 0
+		log.info("상품 저장전 proId : " + productVo.getProId());	// 0
 		
-		int result = boardMapper.createBoardSelectKey(boardVo); // selectKey 사용
+		int result = productMapper.createProductSelectKey(productVo); // selectKey 사용
 		
-		log.info("게시물 저장후 bno : " + boardVo.getBno());	// ?
+		log.info("상품 저장후 proId : " + productVo.getProId());	// ?
 		
-	    if (result > 0) {
-	    	// 게시물 작성 회원 포인트 증가
-	        memberMapper.updateMemberPoint(boardVo.getMemberId());
-	    }
 	    return result;
 	}
 	
-	/*
-	public int createBoard(BoardVo boardVo) {
-		
-		// 게시물 저장 처리(selectKey 사용)
-		int result = boardMapper.createBoardSelectKey(boardVo);	// 저장한 bno값이 채워짐.
-		
-		log.info("게시물 저장후 bno : " + boardVo.getBno());
-		
-		if (result > 0) {
-			// 게시물 작성 회원 포인트 증가
-			memberMapper.updateMemberPoint(boardVo.getMemberId());
-		}
-		return result;
-	}
-	*/
 	
 	@Override
-	public int updateBoard(BoardVo boardVo) {
-		return boardMapper.updateBoard(boardVo);
+	public int updateProduct(ProductVo productVo) {
+		return productMapper.updateProduct(productVo);
 	}
 
 	@Override
-	public int deleteBoard(int bno) {
-		return boardMapper.deleteBoard(bno);
+	public int deleteProduct(int proId) {
+		return productMapper.deleteProduct(proId);
 	}
 	
 }
